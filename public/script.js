@@ -1,23 +1,16 @@
-document.getElementById('cadastroForm').addEventListener('submit', async function (event) {
-    event.preventDefault(); // Evita o recarregamento da página
+const express = require('express');
+const app = express();
 
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-    try {
-        const response = await fetch('/submit-form', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
+app.post(async (req, res) => {
+    const { nome, sobrenome, email, genero, telefone, dataNascimento, cpf } = req.body;
 
-        if (response.ok) {
-            const result = await response.json();
-            document.getElementById('mensagem-confirmacao').innerText = `Cadastro realizado com sucesso, ${result.nome}!`;
-        } else {
-            document.getElementById('mensagem-confirmacao').innerText = 'Erro ao enviar o formulário.';
-        }
-    } catch (error) {
-        document.getElementById('mensagem-confirmacao').innerText = 'Erro de conexão.';
-    }
+    console.log('Dados recebidos:', req.body);
+
+    // Retorna os dados como confirmação
+    res.json({ message: 'Formulário enviado com sucesso!', data: req.body });
 });
+
+module.exports = app;
