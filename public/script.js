@@ -10,13 +10,17 @@ document.getElementById('cadastroForm').addEventListener('submit', function(even
     const dataNascimento = document.getElementById('dataNascimento').value;
     const cpf = document.getElementById('cpf').value;
 
-    // Exibir os dados em um alerta
-    alert(`Nome: ${nome}\nSobrenome: ${sobrenome}\nE-mail: ${email}\nGênero: ${genero}\nTelefone: ${telefone}\nData de Nascimento: ${dataNascimento}\nCPF: ${cpf}`);
+    // Confirmar se o usuário deseja enviar os dados
+    const confirmacao = confirm(`Você tem certeza que deseja enviar os dados?\n\nNome: ${nome}\nSobrenome: ${sobrenome}\nE-mail: ${email}\nGênero: ${genero}\nTelefone: ${telefone}\nData de Nascimento: ${dataNascimento}\nCPF: ${cpf}`);
 
-    // Aqui, você pode fazer uma requisição para o servidor, se desejar
-    // const formData = new FormData(this);
-    // fetch('/submit-form', {
-    //     method: 'POST',
-    //     body: formData,
-    // });
+    if (confirmacao) {
+        // Exibir os dados em um alerta
+        alert(`Dados enviados:\nNome: ${nome}\nSobrenome: ${sobrenome}\nE-mail: ${email}\nGênero: ${genero}\nTelefone: ${telefone}\nData de Nascimento: ${dataNascimento}\nCPF: ${cpf}`);
+        
+        // Mensagem de agradecimento
+        document.getElementById('mensagem-confirmacao').innerText = 'Obrigado pelo seu cadastro!';
+
+        // Limpar o formulário
+        this.reset();
+    }
 });
