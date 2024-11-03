@@ -1,16 +1,22 @@
-const express = require('express');
-const app = express();
+document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Impede o envio do formulário
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+    // Obter os dados do formulário
+    const nome = document.getElementById('nome').value;
+    const sobrenome = document.getElementById('sobrenome').value;
+    const email = document.getElementById('email').value;
+    const genero = document.getElementById('genero').value;
+    const telefone = document.getElementById('telefone').value;
+    const dataNascimento = document.getElementById('dataNascimento').value;
+    const cpf = document.getElementById('cpf').value;
 
-app.post(async (req, res) => {
-    const { nome, sobrenome, email, genero, telefone, dataNascimento, cpf } = req.body;
+    // Exibir os dados em um alerta
+    alert(`Nome: ${nome}\nSobrenome: ${sobrenome}\nE-mail: ${email}\nGênero: ${genero}\nTelefone: ${telefone}\nData de Nascimento: ${dataNascimento}\nCPF: ${cpf}`);
 
-    console.log('Dados recebidos:', req.body);
-
-    // Retorna os dados como confirmação
-    res.json({ message: 'Formulário enviado com sucesso!', data: req.body });
+    // Aqui, você pode fazer uma requisição para o servidor, se desejar
+    // const formData = new FormData(this);
+    // fetch('/submit-form', {
+    //     method: 'POST',
+    //     body: formData,
+    // });
 });
-
-module.exports = app;
